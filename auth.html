@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Register</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #3494E6, #EC6EAD);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            width: 850px;
+            height: 550px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease;
+        }
+
+        .image-side {
+            width: 40%;
+            background: url('https://images.unsplash.com/photo-1614854262318-831574f15f1f') center center;
+            background-size: cover;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding: 30px;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.7));
+        }
+
+        .image-text {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+
+        .image-text h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .image-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .form-side {
+            width: 60%;
+            background: white;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-header p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: white;
+            padding: 0 5px;
+            font-size: 0.8rem;
+            color: #777;
+            transition: all 0.3s;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #3494E6;
+            box-shadow: 0 0 0 2px rgba(52, 148, 230, 0.2);
+            outline: none;
+        }
+
+        .form-group input:focus + label {
+            color: #3494E6;
+            font-weight: 500;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #3494E6, #EC6EAD);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .form-group button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 15px;
+        }
+
+        .forgot-password a {
+            color: #3494E6;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: color 0.3s;
+        }
+
+        .forgot-password a:hover {
+            color: #EC6EAD;
+            text-decoration: underline;
+        }
+
+        .switch-link {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .switch-link a {
+            color: #3494E6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .switch-link a:hover {
+            color: #EC6EAD;
+        }
+
+        .social-login {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .google-icon {
+            background: #fff;
+        }
+        
+        .facebook-icon {
+            background: #fff;
+        }
+        
+        .linkedin-icon {
+            background: #fff;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .divider:before, .divider:after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #ddd;
+        }
+
+        .divider span {
+            padding: 0 10px;
+            color: #777;
+            font-size: 0.8rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .back-link {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .back-link a {
+            color: #3494E6;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .back-link a:hover {
+            color: #EC6EAD;
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #777;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                width: 95%;
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .image-side {
+                width: 100%;
+                height: 200px;
+            }
+            
+            .form-side {
+                width: 100%;
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-side">
+            <div class="image-overlay"></div>
+            <div class="image-text">
+                <h2>Welcome to our platform</h2>
+                <p>Discover amazing features and connect with our community</p>
+            </div>
+        </div>
+        <div class="form-side">
+            <div id="login-register-form">
+                <div class="form-header">
+                    <h1 id="formTitle">Sign In</h1>
+                    <p class="welcome">Welcome back! Please login to your account</p>
+                    <p style="font-size: 0.8rem; color: #777; margin-top: 5px;">Use your email or social accounts</p>
+                </div>
+                <form id="authForm">
+                    <div class="form-group">
+                        <input type="text" id="username" required>
+                        <label for="username">Username</label>
+                    </div>
+                    <div class="form-group input-with-icon">
+                        <input type="password" id="password" required>
+                        <label for="password">Password</label>
+                        <span class="toggle-password" onclick="togglePasswordVisibility()">👁️</span>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#" id="forgotPasswordLink">Forgot Password?</a>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Sign In</button>
+                    </div>
+                    <div class="divider">
+                        <span>OR</span>
+                    </div>
+                    <div class="social-login">
+                        <div class="social-icon google-icon" onclick="loginWithGoogle()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48">
+                                <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path>
+                                <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path>
+                                <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path>
+                                <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path>
+                            </svg>
+                        </div>
+                        <div class="social-icon facebook-icon" onclick="loginWithFacebook()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                                <path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </div>
+                        <div class="social-icon linkedin-icon" onclick="loginWithLinkedIn()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                                <path fill="#0A66C2" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="switch-link">
+                        <a href="#" id="switchToRegister">Don't have an account? Sign Up</a>
+                    </div>
+                </form>
+            </div>
+
+            <div id="forgot-password-form" style="display: none;">
+                <div class="form-header">
+                    <h1>Reset Password</h1>
+                    <p>Enter your username and new password</p>
+                </div>
+                <form id="resetForm">
+                    <div class="form-group">
+                        <input type="text" id="resetUsername" required>
+                        <label for="resetUsername">Username</label>
+                    </div>
+                    <div class="form-group input-with-icon">
+                        <input type="password" id="newPassword" required>
+                        <label for="newPassword">New Password</label>
+                        <span class="toggle-password" onclick="toggleResetPasswordVisibility()">👁️</span>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Reset Password</button>
+                    </div>
+                    <div class="back-link">
+                        <a href="#" id="backToLogin">Back to Login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const authForm = document.getElementById('authForm');
+        const resetForm = document.getElementById('resetForm');
+        const formTitle = document.getElementById('formTitle');
+        const switchToRegister = document.getElementById('switchToRegister');
+        const welcomeText = document.querySelector('.welcome');
+        const loginRegisterForm = document.getElementById('login-register-form');
+        const forgotPasswordForm = document.getElementById('forgot-password-form');
+        const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+        const backToLogin = document.getElementById('backToLogin');
+        let isLogin = true;
+
+        // API endpoint
+        const apiUrl = 'https://673e75790118dbfe860b5976.mockapi.io/users';
+        
+        // Social login functions
+        function loginWithGoogle() {
+            // In a real implementation, this would use the Google OAuth API
+            console.log('Logging in with Google...');
+            
+            // Create a Google OAuth URL (this is a simplified example)
+            const googleClientId = '123456789-example.apps.googleusercontent.com'; // Replace with your actual Google Client ID
+            const redirectUri = encodeURIComponent(window.location.origin + '/auth/google/callback');
+            const scope = encodeURIComponent('profile email');
+            const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${googleClientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
+            
+            // For demonstration purposes, show an alert instead of redirecting
+            alert('Connecting to Google login...');
+            // In production, you would redirect to the OAuth URL:
+            // window.location.href = googleAuthUrl;
+        }
+        
+        function loginWithFacebook() {
+            // In a real implementation, this would use the Facebook Login API
+            console.log('Logging in with Facebook...');
+            alert('Connecting to Facebook login...');
+        }
+        
+        function loginWithLinkedIn() {
+            // In a real implementation, this would use the LinkedIn OAuth API
+            console.log('Logging in with LinkedIn...');
+            
+            // Create a LinkedIn OAuth URL (this is a simplified example)
+            const linkedInClientId = 'your-linkedin-client-id'; // Replace with your actual LinkedIn Client ID
+            const redirectUri = encodeURIComponent(window.location.origin + '/auth/linkedin/callback');
+            const scope = encodeURIComponent('r_liteprofile r_emailaddress');
+            const state = Math.random().toString(36).substring(2);
+            const linkedInAuthUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${linkedInClientId}&redirect_uri=${redirectUri}&state=${state}&scope=${scope}`;
+            
+            // For demonstration purposes, show an alert instead of redirecting
+            alert('Connecting to LinkedIn login...');
+            // In production, you would redirect to the OAuth URL:
+            // window.location.href = linkedInAuthUrl;
+        }
+        
+        // Function to handle social login callbacks (simplified)
+        function handleOAuthCallback() {
+            // Check if there's a code parameter in the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            const state = urlParams.get('state');
+            
+            if (code) {
+                // This would typically make a server request to exchange the code for tokens
+                console.log('OAuth code received:', code);
+                
+                // In a real implementation, you would:
+                // 1. Send the code to your backend
+                // 2. Your backend exchanges the code for tokens with the provider
+                // 3. Your backend creates/updates the user account and returns session info
+                // 4. You would then redirect the user to the logged-in state
+                
+                alert('OAuth login successful! Code: ' + code);
+                localStorage.setItem('isLoggedIn', 'true');
+                window.location.href = 'index.html';
+            }
+        }
+        
+        // Check for OAuth callbacks when the page loads
+        window.addEventListener('load', handleOAuthCallback);
+
+        // Toggle password visibility
+        function togglePasswordVisibility() {
+            const passwordField = document.getElementById('password');
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+            } else {
+                passwordField.type = 'password';
+            }
+        }
+
+        // Toggle reset password visibility
+        function toggleResetPasswordVisibility() {
+            const passwordField = document.getElementById('newPassword');
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+            } else {
+                passwordField.type = 'password';
+            }
+        }
+
+        // Switch between login and register
+        switchToRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (isLogin) {
+                formTitle.textContent = 'Sign Up';
+                authForm.querySelector('button').textContent = 'Create Account';
+                switchToRegister.textContent = 'Already have an account? Sign In';
+                welcomeText.textContent = "Create an account to get started";
+                isLogin = false;
+            } else {
+                formTitle.textContent = 'Sign In';
+                authForm.querySelector('button').textContent = 'Sign In';
+                switchToRegister.textContent = "Don't have an account? Sign Up";
+                welcomeText.textContent = "Welcome back! Please login to your account";
+                isLogin = true;
+            }
+        });
+
+        // Show forgot password form
+        forgotPasswordLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginRegisterForm.style.display = 'none';
+            forgotPasswordForm.style.display = 'block';
+        });
+
+        // Back to login
+        backToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            forgotPasswordForm.style.display = 'none';
+            loginRegisterForm.style.display = 'block';
+        });
+
+        // Handle login and registration
+        authForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (isLogin) {
+                try {
+                    const response = await fetch(apiUrl, { method: 'GET', headers: { 'Content-Type': 'application/json' } });
+                    const users = await response.json();
+                    const user = users.find(user => user.username === username && user.password === password);
+
+                    if (user) {
+                        alert('Login Successful!');
+                        localStorage.setItem('isLoggedIn', 'true');
+                        window.location.href = 'index.html';
+                    } else {
+                        alert('Invalid username or password');
+                    }
+                } catch (error) {
+                    alert('An error occurred while logging in.');
+                }
+            } else {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username, password })
+                    });
+
+                    if (response.ok) {
+                        alert('Registration Successful!');
+                        window.location.href = 'index.html';
+                    } else {
+                        alert('An error occurred while registering.');
+                    }
+                } catch (error) {
+                    alert('An error occurred while registering.');
+                }
+            }
+        });
+
+        // Handle password reset
+        resetForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('resetUsername').value;
+            const newPassword = document.getElementById('newPassword').value;
+
+            try {
+                // First, fetch all users to find the one we need to update
+                const response = await fetch(apiUrl, { 
+                    method: 'GET', 
+                    headers: { 'Content-Type': 'application/json' } 
+                });
+                
+                const users = await response.json();
+                const user = users.find(user => user.username === username);
+
+                if (user) {
+                    // If user exists, update their password
+                    const updateResponse = await fetch(`${apiUrl}/${user.id}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ ...user, password: newPassword })
+                    });
+
+                    if (updateResponse.ok) {
+                        alert('Password reset successful! Please login with your new password.');
+                        forgotPasswordForm.style.display = 'none';
+                        loginRegisterForm.style.display = 'block';
+                        document.getElementById('resetForm').reset();
+                    } else {
+                        alert('An error occurred while resetting your password.');
+                    }
+                } else {
+                    alert('Username not found. Please check and try again.');
+                }
+            } catch (error) {
+                alert('An error occurred while processing your request.');
+                console.error('Error:', error);
+            }
+        });
+    </script>
+</body>
+</html>

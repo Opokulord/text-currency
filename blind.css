@@ -1,0 +1,108 @@
+/* Dark Mode Theme */
+:root {
+    /* Dark mode color palette */
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+    --accent-color: #bb86fc;
+    --error-color: #cf6679;
+    --success-color: #03dac6;
+    --border-color: #333333;
+}
+
+/* Base styles */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+}
+
+p, span, div {
+    color: var(--text-secondary);
+}
+
+/* Links */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Form elements */
+input, textarea, select {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+/* Buttons */
+button {
+    background-color: var(--accent-color);
+    color: var(--bg-primary);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* Cards and containers */
+.card, .container {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+/* Status colors */
+.error {
+    color: var(--error-color);
+}
+
+.success {
+    color: var(--success-color);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+}
+
+/* Selection color */
+::selection {
+    background-color: var(--accent-color);
+    color: var(--bg-primary);
+}
